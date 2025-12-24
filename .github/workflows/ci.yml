@@ -61,13 +61,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
-          languages: javascript
+          languages: rust
+
+      - name: Build (before scan)
+        run: |
+          cargo build --release --all-features --verbose
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
 
   # =============================================================================
   # STEP 2: DCO (DEVELOPER CERTIFICATE OF ORIGIN) CHECK
