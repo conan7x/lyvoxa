@@ -37,6 +37,19 @@ Pull requests that do not include Signed-off-by lines for each commit may be rej
 5. Commit with `-s` to include the DCO footer.
 6. Open a pull request. Fill out the PR template.
 
+## Commit Message Convention
+
+Lyvoxa follows Conventional Commits.
+
+Examples:
+
+- `feat(tui): add new widget`
+- `fix(monitor): handle permission error`
+- `docs: update installation guide`
+- `chore(deps): bump dependencies`
+
+For the release process, see `docs/RELEASING.md`.
+
 ## Coding Style
 
 - Rust edition 2024.

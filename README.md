@@ -190,6 +190,7 @@ sort = "cpu"              # cpu | mem | pid | user | command
 - **[Verification Guide](docs/VERIFICATION.md)** - SHA256 + GPG verification (Bahasa)
 - **[GPG Setup](docs/GITHUB_GPG_SETUP.md)** - Auto-signing configuration
 - **[Security Policy](docs/SECURITY.md)** - Security best practices
+- **[Releasing](docs/RELEASING.md)** - How to cut a release (auto-tag + CI/CD)
 - **[Contributing](docs/CONTRIBUTING.md)** - Contribution guidelines
 
 ## 🤝 Contributing

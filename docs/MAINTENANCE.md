@@ -147,6 +147,10 @@ Runs setup and dependency update in sequence.
 
 ## Maintenance Workflows
 
+### Creating a Release
+
+See `docs/RELEASING.md`.
+
 ### Weekly Maintenance
 
 ```bash
@@ -194,8 +198,12 @@ cargo outdated
    ```bash
    git add -A
    git commit -m "chore(release): bump to X.Y.Z"
-   git tag -a vX.Y.Z -m "Release vX.Y.Z"
-   git push origin main --tags
+   # Option A (recommended): push commit, tag is created automatically
+   git push origin main
+
+   # Option B (manual): create and push tag yourself
+   git tag -a X.Y.Z -m "Release X.Y.Z"
+   git push origin X.Y.Z
    ```
 
 ### New Developer Setup

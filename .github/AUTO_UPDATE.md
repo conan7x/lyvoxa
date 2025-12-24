@@ -8,7 +8,7 @@ Lyvoxa uses a powerful GitHub Actions bot instead of Dependabot for superior aut
 
 | Feature | Dependabot | GitHub Actions Bot |
 |---------|------------|-------------------|
-| **Pull Requests** | ✅ Creates PRs | ❌ Direct commit to main |
+| **Pull Requests** | ✅ Creates PRs | ✅ Direct commit or PR (configurable) |
 | **Manual Review** | 😰 Required | 🎉 Automated |
 | **Workflow Integration** | ❌ Separate | ✅ Part of CI/CD |
 | **GitHub Verification** | ⚠️ Basic | ✅ Yes (bot commits) |
@@ -20,7 +20,7 @@ Lyvoxa uses a powerful GitHub Actions bot instead of Dependabot for superior aut
 
 ### 🚀 How It Works
 
-**Daily Schedule (07:00 UTC / 14:00 WIB):**
+**Daily Schedule (00:00 UTC / 07:00 WIB / 08:00 SGT):**
 
 ```
 1. 📥 Checkout repository
@@ -30,7 +30,7 @@ Lyvoxa uses a powerful GitHub Actions bot instead of Dependabot for superior aut
 5. 🧪 cargo test (ensure quality)
 6. 🔍 cargo clippy (code quality)
 7. ✅ Commit (verified by GitHub)
-8. 🚀 Push directly to main
+8. 🚀 Push directly to main (or open a PR)
 9. ✅ Done!
 ```
 
@@ -69,7 +69,7 @@ Verified ✅ By: github-actions[bot]
 **Schedule:**
 ```yaml
 schedule:
-  - cron: '0 7 * * *'  # Daily at 07:00 UTC
+  - cron: '0 0 * * *'  # Daily at 00:00 UTC
 ```
 
 **Customization:**
@@ -82,6 +82,11 @@ schedule:
 Actions → Auto Update Dependencies → Run workflow
 ```
 
+**Strategy (direct vs PR):**
+
+- `strategy: direct` (default): commits directly to `main`
+- `strategy: pr`: opens/updates a PR (`bot/auto-update`)
+
 **Force Update (skip test failures):**
 ```
 Actions → Run workflow → force_update: true
@@ -91,6 +96,7 @@ Actions → Run workflow → force_update: true
 
 **Automatically:**
 - ✅ All Rust dependencies (Cargo.lock)
+- ✅ Any repository changes produced by the update pipeline (future-proof: workflows/src/etc)
 - ✅ Security patches
 - ✅ Compatible minor/patch versions
 
@@ -119,7 +125,7 @@ Commits show "Verified" badge in GitHub UI automatically.
 - ✅ Tests must pass (or force_update)
 - ✅ Build must succeed
 - ✅ Security audit runs
-- ✅ Only updates Cargo.lock (not Cargo.toml)
+- ✅ Keeps version constraints (Cargo.toml is not changed by default)
 - ✅ Clippy warnings visible
 
 **Rollback:**
@@ -132,7 +138,7 @@ git push
 ### 📊 Example Commit
 
 ```
-ci(deps): auto-update dependencies
+chore(deps): auto-update dependencies
 
 🤖 Automated daily dependency update by GitHub Actions
 
